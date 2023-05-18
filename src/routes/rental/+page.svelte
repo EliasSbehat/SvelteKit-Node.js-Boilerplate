@@ -21,7 +21,9 @@
 			let indexChecked = checked.indexOf(event.target.id);
 			checked.splice(indexChecked, 1);
 		}
-		console.log(checked);
+	}
+	function handlerEdit(event) {
+		console.log(event.target);
 	}
 	async function handleDeleteData() {
 		let checks = new FormData();
@@ -51,6 +53,7 @@
 			<th>Location</th>
 			<th>Property</th>
 			<th>C</th>
+			<th>Edit</th>
 		</tr>
 		<tbody>
 			{#key rentalData}
@@ -61,6 +64,7 @@
 						<td>{rows.address}</td>
 						<td><img src={rows.image} width=100 style:margin="10px auto" style:display="block" alt={alt}></td>
 						<td><input type="checkbox" id={rows._id} on:click={handlerCheckbox} /></td>
+						<td><button id={rows._id} on:click={handlerEdit}>Edit</button></td>
 					</tr>
 				{/each}
 			{/key}

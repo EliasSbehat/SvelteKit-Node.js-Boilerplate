@@ -1,5 +1,4 @@
 <script>
-	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 </script>
@@ -17,15 +16,14 @@
 				<img src={welcome_fallback} alt="Welcome" />
 			</picture>
 		</span>
-
-		to your new<br />SvelteKit app
 	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<div class="login-container">
+		<form action="">
+			<input type="text" placeholder="Name" /> <br /><br />
+			<input type="password" placeholder="Password" />
+			<button>login</button>
+		</form>
+	</div>
 </section>
 
 <style>
@@ -55,5 +53,11 @@
 		height: 100%;
 		top: 0;
 		display: block;
+	}
+	.login-container {
+		width: 400px;
+		height: 150px;
+		border: solid 1px;
+		padding: 20px;
 	}
 </style>

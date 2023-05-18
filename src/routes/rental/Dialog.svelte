@@ -2,9 +2,12 @@
   import { enhance } from "$app/forms";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
-  let name = "";
-  let location = "";
-  let base64Image = ``;
+  export let editObj = {};
+  let name = editObj.name;
+  let location = editObj.address;
+  let base64Image = editObj.image;
+  let flag = editObj.flag;
+  let rid = editObj.id;
   function handleClose() {
     dispatch("handleClose", {
       open: false,
@@ -44,7 +47,8 @@
       on:change={handleFileUpload}
     /> <br /><br />
     <input type="hidden" name="propertyImage" bind:value={base64Image} />
-    <input type="hidden" name="flag" value="Save">
+    <input type="hidden" name="flag" bind:value={flag}>
+    <input type="hidden" name="id" bind:value={rid}>
     <button type="submit">Save</button>
   </form>
 </div>

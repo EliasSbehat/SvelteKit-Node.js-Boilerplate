@@ -19,7 +19,8 @@ export const actions = {
 				name: data.get("name"),
 				flag: data.get("flag"),
 				addr: data.get("location"),
-				image: data.get("propertyImage")
+				image: data.get("propertyImage"),
+				id: data.get("id")
 			}
 		);
 	},

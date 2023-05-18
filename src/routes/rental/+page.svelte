@@ -4,10 +4,16 @@
 	import Dialog from './Dialog.svelte';
 	/** @type {import('./$types').PageData} */
 	export let data;
-
 	$: rentalData = data.datas[0];
 	let open = false;
 	let checked = [];
+	let editObj = {
+		name: "",
+		address: "",
+		image: "",
+		flag: "Save",
+		id: ""
+	};
 	function handleOpenDialog(event) {
 		open = event.detail.open;
 	}
@@ -23,7 +29,16 @@
 		}
 	}
 	function handlerEdit(event) {
-		console.log(event.target);
+		let trs = event.target.parentNode.parentNode.childNodes;
+		editObj = {
+			name: trs[2].innerText,
+			address: trs[4].innerText,
+			image: trs[6].children[0].currentSrc,
+			flag: "Update",
+			id: event.target.id
+		}
+		open = true;
+		console.log(editObj,23);
 	}
 	async function handleDeleteData() {
 		let checks = new FormData();
@@ -43,9 +58,11 @@
 	<h1>Rental CRUD</h1>
 
 	<Toolbar on:handleCreate={handleOpenDialog} on:handleDelete={handleDeleteData} />
-	{#if open}
-		<Dialog on:handleClose={handleCloseDialog} />
-	{/if}
+	{#key editObj}
+		{#if open}
+			<Dialog on:handleClose={handleCloseDialog} editObj={editObj} />
+		{/if}
+	{/key}
 	<table>
 		<tr>
 			<th>No</th>

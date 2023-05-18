@@ -15,7 +15,7 @@ module.exports = function () {
                 }
             });
         } else {
-            Rental.findOneAndUpdate({_id:req.body.flag},{
+            Rental.findOneAndUpdate({_id:req.body.id},{
                 name: req.body.name,
                 address: req.body.addr,
                 image: req.body.image

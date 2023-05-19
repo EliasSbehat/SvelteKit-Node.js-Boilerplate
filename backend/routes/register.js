@@ -6,20 +6,22 @@ const User = require('../models/user.model');
 module.exports = function () {
     console.log("req");
     router.route("/signup").post(function (req, res) {
-        User.findOne({username:req.body.username},function(err,data){
+        console.log(req.body);
+        var user = req.body.user;
+        User.findOne({username:user.username},function(err,data){
             if (data) {
                 res.send({ state: "alreadyuser" });
             } else {
                 User.create({
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password,
-                    token: md5(req.body.username + "__" + req.body.password),
+                    username: user.username,
+                    email: user.email,
+                    password: user.password,
+                    token: md5(user.username + "__" + user.password),
                     role: 0,
                 }, function (err, data) {
                     console.log(data);
                     if (!err) {
-                        res.send({ state: "success" });
+                        res.send({ state: "success", data: data });
                     }
                 });
             }

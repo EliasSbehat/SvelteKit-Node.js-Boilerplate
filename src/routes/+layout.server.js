@@ -6,10 +6,3 @@ export async function load({cookies}) {
         jwt: cookies.get('jwt')
     };
 }
-
-/** @type {import('./$types').Actions} */
-export const actions = {
-	logout: async ({ cookies, locals }) => {
-		cookies.delete('jwt', { path: '/' });
-	}
-};

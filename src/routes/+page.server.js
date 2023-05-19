@@ -8,7 +8,7 @@ export async function load({cookies}) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-	default: async ({ cookies, request }) => {
+	signin: async ({ cookies, request }) => {
 		const data = await request.formData();
 		const user = {
 			username: data.get('name'),
@@ -21,12 +21,15 @@ export const actions = {
             return fail(401, body);
         }
         console.log(body);
-        if (body.status=="success") {
+        if (body.state=="success") {
             const value = btoa(JSON.stringify(body));
             console.log(value);
             cookies.set('jwt', value, { path: '/' });
         }
         cookies.get('jwt')
 		throw redirect(307, '/');
+	},
+	logout: async ({ cookies, locals }) => {
+		cookies.delete('jwt', { path: '/' });
 	}
 };

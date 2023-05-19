@@ -33,8 +33,8 @@
 					<a href="/rental">Rental</a>
 				</li>
 				<li>
-					<form use:enhance method="POST" action="?/logout">
-						<button class="btn btn-outline-danger">Logout.</button>
+					<form use:enhance method="POST" action="/?/logout">
+						<button class="btn btn-outline-danger">Logout</button>
 					</form>
 				</li>
 			{/if}

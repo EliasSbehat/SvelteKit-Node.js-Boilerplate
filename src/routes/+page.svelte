@@ -19,7 +19,7 @@
 		</span>
 	</h1>
 	<div class="login-container">
-		<form method="POST" use:enhance>
+		<form method="POST" action="?/signin" use:enhance>
 			<input type="text" name="name" placeholder="Name" required /> <br /><br />
 			<input type="password" name="password" placeholder="Password" required />
 			<button>login</button>

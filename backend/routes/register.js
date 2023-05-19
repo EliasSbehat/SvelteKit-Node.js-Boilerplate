@@ -6,8 +6,7 @@ const User = require('../models/user.model');
 module.exports = function () {
     console.log("req");
     router.route("/signup").post(function (req, res) {
-        console.log(req.body);
-        var user = req.body.user;
+        const user = req.body.user;
         User.findOne({username:user.username},function(err,data){
             if (data) {
                 res.send({ state: "alreadyuser" });
@@ -28,7 +27,7 @@ module.exports = function () {
         });
     });
     router.route("/signin").post(function (req, res) {
-        const user = req.body;
+        const user = req.body.user;
         User.findOne({username:user.username},function(err,data){
             if(!err){
                 if(data == null){

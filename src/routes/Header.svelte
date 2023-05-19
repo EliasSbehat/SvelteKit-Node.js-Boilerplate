@@ -1,7 +1,10 @@
 <script>
 	import { page } from '$app/stores';
+	import { enhance } from '$app/forms';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+
+	export let auth;
 </script>
 
 <header>
@@ -22,12 +25,19 @@
 			<li aria-current={$page.url.pathname === '/signup' ? 'page' : undefined}>
 				<a href="/signup">SignUp</a>
 			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/rental') ? 'page' : undefined}>
-				<a href="/rental">Rental</a>
-			</li>
+			{#if auth?.jwt}
+				<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
+					<a href="/sverdle">Sverdle</a>
+				</li>
+				<li aria-current={$page.url.pathname.startsWith('/rental') ? 'page' : undefined}>
+					<a href="/rental">Rental</a>
+				</li>
+				<li>
+					<form use:enhance method="POST" action="?/logout">
+						<button class="btn btn-outline-danger">Logout.</button>
+					</form>
+				</li>
+			{/if}
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />

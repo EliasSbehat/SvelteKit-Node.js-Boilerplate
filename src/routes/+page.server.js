@@ -2,7 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import * as api from '$lib/api.js';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load() {
+export async function load({cookies}) {
 	return {};
 }
 
@@ -12,19 +12,21 @@ export const actions = {
 		const data = await request.formData();
 		const user = {
 			username: data.get('name'),
-			email: data.get('email'),
 			password: data.get('password')
 		};
 
-		const body = await api.post('auth/signup', { user });
+		const body = await api.post('auth/signin', { user });
 
 		if (body.errors) {
-			return fail(401, body);
-		}
-		// const value = btoa(JSON.stringify(body.data));
-        // console.log(value);
-		// cookies.set('jwt', value, { path: '/' });
-
+            return fail(401, body);
+        }
+        console.log(body);
+        if (body.status=="success") {
+            const value = btoa(JSON.stringify(body));
+            console.log(value);
+            cookies.set('jwt', value, { path: '/' });
+        }
+        cookies.get('jwt')
 		throw redirect(307, '/');
 	}
 };

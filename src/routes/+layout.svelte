@@ -1,10 +1,13 @@
 <script>
 	import Header from './Header.svelte';
 	import './styles.css';
+
+	export let data;
+	console.log(data);
 </script>
 
 <div class="app">
-	<Header />
+	<Header auth={data} />
 
 	<main>
 		<slot />
